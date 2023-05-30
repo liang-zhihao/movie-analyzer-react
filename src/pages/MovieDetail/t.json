@@ -1,0 +1,44 @@
+{
+    "year": 1998,
+    "runtime": 83,
+    "genres": [
+        "Adventure",
+        "Animation",
+        "Comedy"
+    ],
+    "country": "United States",
+    "principals": [
+        {
+            "id": "nm0506977",
+            "category": "producer",
+            "name": "Bradford Lewis",
+            "characters": []
+        },
+        {
+            "id": "nm0000095",
+            "category": "actor",
+            "name": "Woody Allen",
+            "characters": [
+                "Z"
+            ]
+        }
+    ],
+    "ratings": [
+        {
+            "source": "Internet Movie Database",
+            "value": 6.5
+        },
+        {
+            "source": "Rotten Tomatoes",
+            "value": 92
+        },
+        {
+            "source": "Metacritic",
+            "value": 72
+        }
+    ],
+    "boxoffice": 90757863,
+    "poster": "https://m.mediaamazon.com/images/M/MV5BMzMzMDdlMDktODg4OC00Y2E5LTk1ZjMtNzM2MzIxZGQ0ZGI3XkEyXk
+FqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg", "plot": "A rather neurotic ant tries to break from his totalitarian society 
+while trying to win the affection of the princess he loves."
+}

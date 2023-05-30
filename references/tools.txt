@@ -1,0 +1,8 @@
+Table:
+https://www.ag-grid.com/javascript-data-grid/
+https://www.ag-grid.com/react-data-grid/infinite-scrolling/
+charts:
+https://react-chartjs-2.js.org/
+https://www.chartjs.org/
+UI:
+https://mui.com/material-ui/getting-started/templates/pricing/
