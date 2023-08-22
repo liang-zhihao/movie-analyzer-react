@@ -1,9 +1,9 @@
 import axios from "axios";
- 
+
 import userStore from "../stores/userStore";
 
 
-let headers = { 'content-type': 'application/json' }
+let headers = {'content-type': 'application/json'}
 let INSTANCE = axios.create({
 
     timeout: 10000,
@@ -17,14 +17,15 @@ let INSTANCE = axios.create({
 //  refresh
 INSTANCE.interceptors.request.use(
     async (config) => {
-
-      
-     
         const bearerToken = userStore.bearerToken
         const refreshToken = userStore.refreshToken
+        // is url contains Logout and login
+        // if (config.url.includes('logout') || config.url.includes('login')) {
+        //     alert('logout')
+        //     return config;
+        // }
         if (bearerToken) {
             const expirationTime = userStore.bearerTokenExpiresIn;
-
             // Check if the access token is expired or about to expire
             if (expirationTime) {
                 try {
@@ -69,6 +70,7 @@ INSTANCE.interceptors.request.use(
 //     }
 // )
 const DEBUG = true
+
 function request(url, method, params) {
     return new Promise((resolve, reject) => {
         let data = {}
@@ -80,7 +82,7 @@ function request(url, method, params) {
         //     console.log('Sending data', data)
         // }
 
-        INSTANCE({ url, method, data }).then((res) => {
+        INSTANCE({url, method, data}).then((res) => {
             // if (DEBUG) {
             //     console.log(res)
             // }

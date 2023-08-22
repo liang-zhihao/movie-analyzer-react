@@ -1,8 +1,7 @@
-
-import { makeAutoObservable, runInAction } from 'mobx'
+import {makeAutoObservable, runInAction} from 'mobx'
 
 import APIFunction from '../services/api'
-import { makePersistable, clearPersistedStore } from 'mobx-persist-store';
+import {makePersistable, clearPersistedStore} from 'mobx-persist-store';
 import refreshTokenApi from '../services/refreshToken';
 // "bearerToken": {
 //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjFAMi5jb20iLCJleHAiOjE2ODI1MDMwNDMsImlhdCI6MTY4MjUwMjQ0M30.28saupLhY2GKsOpI9nGANCC5lgLPJfzb-8kjND4Q_5Y",
@@ -22,36 +21,42 @@ class UserStore {
     bearerTokenExpiresIn = 0
     refreshTokenExpiresIn = 0
     keywords = ''
+
     constructor() {
         makeAutoObservable(this)
         // when you want to persist the store, need to know they will be converted to string
-        makePersistable(this, { name: 'UserStore', properties: ['isLoggedIn', 'email', 'bearerToken', 'refreshToken', 'bearerTokenExpiresIn', 'refreshTokenExpiresIn'], storage: window.localStorage });
+        makePersistable(this, {
+            name: 'UserStore',
+            properties: ['isLoggedIn', 'email', 'bearerToken', 'refreshToken', 'bearerTokenExpiresIn', 'refreshTokenExpiresIn'],
+            storage: window.localStorage
+        });
 
     }
-    login = async ({ email, password }) => {
-        return APIFunction.login({ email, password }).
-            then((res) => {
 
-                runInAction(() => {
-                    this.isLoggedIn = true
-                    this.email = email
-                    this.bearerToken = res.bearerToken['token']
-                    this.refreshToken = res.refreshToken['token']
-                    this.bearerTokenExpiresIn = res.bearerToken['expires_in']
-                    this.refreshTokenExpiresIn = res.refreshToken['expires_in']
-                    console.log(this.refreshToken);
+    login = async ({email, password}) => {
+        return APIFunction.login({email, password}).then((res) => {
 
-                })
-                return res
+            runInAction(() => {
+                this.isLoggedIn = true
+                this.email = email
+                this.bearerToken = res.bearerToken['token']
+                this.refreshToken = res.refreshToken['token']
+                this.bearerTokenExpiresIn = res.bearerToken['expires_in']
+                this.refreshTokenExpiresIn = res.refreshToken['expires_in']
+                console.log(this.refreshToken);
+
             })
+            return res
+        })
     }
     logout = async () => {
 
-        await APIFunction.logout({ refreshToken: this.refreshToken })
+        await APIFunction.logout({refreshToken: this.refreshToken})
             .then((res) => {
                 alert('logout')
                 console.log('logout');
-
+            }).catch((err) => {
+                console.log('logout');
             })
         await clearPersistedStore(this);
         this.isLoggedIn = false
@@ -69,7 +74,7 @@ class UserStore {
             throw new Error('No refresh token found.');
         }
         try {
-            refreshTokenApi({ refreshToken }).then((res) => {
+            refreshTokenApi({refreshToken}).then((res) => {
 
                 runInAction(() => {
                     const data = res.data
@@ -85,14 +90,17 @@ class UserStore {
             throw error;
         }
     }
+
     setKeywords(keywords) {
         this.keywords = keywords
     }
+
     getKeywords() {
         return this.keywords
     }
 
 
 }
+
 const userStore = new UserStore()
 export default userStore

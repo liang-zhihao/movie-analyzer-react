@@ -14,7 +14,7 @@ function Landing({ title }) {
     return (
         <React.Fragment>
             <Grid container spacing={2} alignItems="center">
-                <Grid item xs={12} md={6} align="center">
+                <Grid  xs={12} md={6} align="center">
                     <img
                         src={ReactLogo}
                         loading="lazy"
@@ -22,7 +22,7 @@ function Landing({ title }) {
                         style={{ maxWidth: "100%", height: "auto" }}
                     />
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid   xs={12} md={6}>
                     <Stack spacing={4} sx={{ px: 2 }}>
                         <Typography variant="h3" align="center" gutterBottom>
                             MovieCrate
@@ -34,7 +34,7 @@ function Landing({ title }) {
                             display="flex"
                             justifyContent="center"
                             alignItems="center"
-                            className="  w-full"
+                            className="w-full"
                         >
                             <Link to="/movies">
                                 <Button color="success"  >
